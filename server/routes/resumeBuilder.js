@@ -80,7 +80,7 @@ router.post('/generate', async (req, res) => {
       {
         model: 'anthropic/claude-3-sonnet-20240229',
         messages: [{ role: 'user', content: prompt }],
-        max_tokens: 1500,
+        max_tokens: 1200,
       },
       {
         headers: {
