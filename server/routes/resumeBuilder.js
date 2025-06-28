@@ -24,49 +24,36 @@ router.post('/generate', async (req, res) => {
     return res.status(400).json({ error: 'All fields are required' });
   }
 
-  const prompt = `You are an expert ATS-optimized resume designer. Create a visually stunning HTML resume that passes through applicant tracking systems while maintaining elegant design. Follow these requirements carefully:
+  const prompt = `
+You are an expert resume writer and modern web designer.
 
-# Candidate Details
+Generate a highly professional, visually appealing, and ATS-friendly HTML resume using the following information:
+
 - Full Name: ${fullName}
-- Target Position: ${jobTitle}
-- Professional Experience: ${experience}
-- Education Background: ${education}
-- Technical Skills: ${skills}
-- Additional Information: ${info || 'N/A'}
+- Job Title: ${jobTitle}
+- Experience: ${experience}
+- Education: ${education}
+- Skills: ${skills}
+${projects ? `- Projects: ${projects}` : ''}
+${info ? `- Additional Information: ${info}` : ''}
 
-# Design Requirements
-1. ATS Compatibility:
-   - Use standard section headers (Experience, Education, Skills)
-   - Include relevant keywords from the ${jobTitle} field
-   - No tables, columns, or complex layouts that confuse ATS
+✅ Resume Requirements:
+- Use pure, clean **HTML with inline CSS** (no external files).
+- Design must be modern, **visually balanced**, and **mobile-friendly**.
+- Use **light background**, elegant fonts (e.g., "Segoe UI", "Roboto", or "Open Sans").
+- Add **subtle shadows**, **rounded containers**, and consistent padding/margin.
+- Section headings should be **color-coded or bold** and separated clearly.
+- Use `<section>` tags for **Summary**, **Education**, **Experience**, **Skills**, and **Projects** (if provided).
+- Add spacing between sections to enhance readability.
+- Ensure the resume is **A4-compatible** when printed or saved as PDF (avoid page breaks in the middle of sections).
+- Avoid complex HTML structures that break in ATS systems (no tables or floats).
+- Use bullet points for responsibilities, achievements, and skills.
 
-2. Visual Design:
-   - Professional color scheme (primary color: #2563eb, secondary: #4b5563)
-   - Modern typography (clean sans-serif fonts)
-   - Subtle shadows and borders for depth
-   - Balanced white space
-   - Responsive layout
-
-3. HTML Structure:
-   - Semantic HTML5 (<section> tags for each category)
-   - Inline CSS only (no external stylesheets)
-   - Print-optimized for A4 paper size (210mm × 297mm)
-   - Margin: 20mm on all sides
-
-4. Content Sections:
-   - Header with name and contact info
-   - Professional summary (3-4 lines)
-   - Work experience (reverse chronological)
-   - Education (degrees only)
-   - Skills (grouped by category)
-   - Optional: Projects/Certifications if space allows
-
-5. Output Format:
-   - Pure HTML only (no markdown, no ''')
-   - Perfectly valid HTML that can be rendered directly
-   - No placeholder comments or TODOs
-
-Generate only the HTML code for the resume, without any additional commentary or explanation. The design should impress both ATS systems and human recruiters.`;
+🎯 Important:
+- Keep the layout neat and readable.
+- Make sure it scores well with Applicant Tracking Systems (ATS).
+- Output ONLY the final **HTML code**. Do not include explanations, markdown, or comments.
+`;
 
   try {
     // Get HTML from AI
