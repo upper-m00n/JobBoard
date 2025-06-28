@@ -24,10 +24,12 @@ router.post('/generate', async (req, res) => {
     return res.status(400).json({ error: 'All fields are required' });
   }
 
-  const prompt = `
-You are an expert resume writer and modern web designer.
+ const prompt = `
+You're a skilled resume designer and front-end developer.
 
-Generate a highly professional, visually appealing, and ATS-friendly HTML resume using the following information:
+Using the details below, generate a **clean, modern, and ATS-optimized resume** in **pure HTML with inline CSS**. Make it visually similar to a professional PDF resume, styled like a purple & white theme with a neat two-column layout.
+
+Use the following data:
 
 - Full Name: ${fullName}
 - Job Title: ${jobTitle}
@@ -35,25 +37,27 @@ Generate a highly professional, visually appealing, and ATS-friendly HTML resume
 - Education: ${education}
 - Skills: ${skills}
 ${projects ? `- Projects: ${projects}` : ''}
-${info ? `- Additional Information: ${info}` : ''}
+${info ? `- Additional Info: ${info}` : ''}
 
-✅ Resume Requirements:
-- Use pure, clean **HTML with inline CSS** (no external files).
-- Design must be modern, **visually balanced**, and **mobile-friendly**.
-- Use **light background**, elegant fonts (e.g., "Segoe UI", "Roboto", or "Open Sans").
-- Add **subtle shadows**, **rounded containers**, and consistent padding/margin.
-- Section headings should be **color-coded or bold** and separated clearly.
-- Use section tags for **Summary**, **Education**, **Experience**, **Skills**, and **Projects** (if provided).
-- Add spacing between sections to enhance readability.
-- Ensure the resume is **A4-compatible** when printed or saved as PDF (avoid page breaks in the middle of sections).
-- Avoid complex HTML structures that break in ATS systems (no tables or floats).
-- Use bullet points for responsibilities, achievements, and skills.
+📄 **Resume Design Requirements**:
+- Output should be **pure HTML** with all **CSS inline**.
+- Layout should be **2-column** on desktop, responsive on mobile.
+  - Left column (25–30% width): Name, Contact, Skills, Links.
+  - Right column (70–75%): Education, Experience, Projects, etc.
+- Use soft **white background**, dark/gray text, and **purple for highlights/headers**.
+- Use **modern fonts** like 'Segoe UI', 'Open Sans', or 'Roboto'.
+- Add **margins**, **padding**, and **subtle shadows** for sections.
+- Use <section, <h2>, <ul> etc., for **semantic and ATS-friendly layout**.
+- Avoid using <table> or complex positioning.
 
-🎯 Important:
-- Keep the layout neat and readable.
-- Make sure it scores well with Applicant Tracking Systems (ATS).
-- Output ONLY the final **HTML code**. Do not include explanations, markdown, or comments.
+🖨️ **Print Requirements**:
+- Ensure content fits within **A4** without breaking sections.
+- Keep left and right margins at around 20mm.
+- Use printBackground: true when rendered to PDF.
+
+Only return valid and beautiful **HTML code**. Do not return markdown, explanations, or extra text.
 `;
+
 
   try {
     // Get HTML from AI
