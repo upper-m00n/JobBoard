@@ -43,7 +43,7 @@ ${info ? `- Additional Information: ${info}` : ''}
 - Use **light background**, elegant fonts (e.g., "Segoe UI", "Roboto", or "Open Sans").
 - Add **subtle shadows**, **rounded containers**, and consistent padding/margin.
 - Section headings should be **color-coded or bold** and separated clearly.
-- Use `<section>` tags for **Summary**, **Education**, **Experience**, **Skills**, and **Projects** (if provided).
+- Use section tags for **Summary**, **Education**, **Experience**, **Skills**, and **Projects** (if provided).
 - Add spacing between sections to enhance readability.
 - Ensure the resume is **A4-compatible** when printed or saved as PDF (avoid page breaks in the middle of sections).
 - Avoid complex HTML structures that break in ATS systems (no tables or floats).
