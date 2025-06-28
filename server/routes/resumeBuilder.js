@@ -24,13 +24,49 @@ router.post('/generate', async (req, res) => {
     return res.status(400).json({ error: 'All fields are required' });
   }
 
-  const prompt = `Generate a modern HTML resume with:
-  Name: ${fullName}
-  Title: ${jobTitle}
-  Experience: ${experience}
-  Education: ${education}
-  Skills: ${skills}
-  Output: Clean HTML with inline CSS, A4 compatible`;
+  const prompt = `You are an expert ATS-optimized resume designer. Create a visually stunning HTML resume that passes through applicant tracking systems while maintaining elegant design. Follow these requirements carefully:
+
+# Candidate Details
+- Full Name: ${fullName}
+- Target Position: ${jobTitle}
+- Professional Experience: ${experience}
+- Education Background: ${education}
+- Technical Skills: ${skills}
+- Additional Information: ${info || 'N/A'}
+
+# Design Requirements
+1. ATS Compatibility:
+   - Use standard section headers (Experience, Education, Skills)
+   - Include relevant keywords from the ${jobTitle} field
+   - No tables, columns, or complex layouts that confuse ATS
+
+2. Visual Design:
+   - Professional color scheme (primary color: #2563eb, secondary: #4b5563)
+   - Modern typography (clean sans-serif fonts)
+   - Subtle shadows and borders for depth
+   - Balanced white space
+   - Responsive layout
+
+3. HTML Structure:
+   - Semantic HTML5 (<section> tags for each category)
+   - Inline CSS only (no external stylesheets)
+   - Print-optimized for A4 paper size (210mm × 297mm)
+   - Margin: 20mm on all sides
+
+4. Content Sections:
+   - Header with name and contact info
+   - Professional summary (3-4 lines)
+   - Work experience (reverse chronological)
+   - Education (degrees only)
+   - Skills (grouped by category)
+   - Optional: Projects/Certifications if space allows
+
+5. Output Format:
+   - Pure HTML only (no markdown, no ''')
+   - Perfectly valid HTML that can be rendered directly
+   - No placeholder comments or TODOs
+
+Generate only the HTML code for the resume, without any additional commentary or explanation. The design should impress both ATS systems and human recruiters.`;
 
   try {
     // Get HTML from AI
