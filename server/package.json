@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "npm install && apt-get update && apt-get install -y chromium",
+    "test": "npm install && apt-get update && apt-get install -y chromium-browser",
     "start": "node server.js"
   },
   "keywords": [],
