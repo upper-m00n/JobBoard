@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { useEffect, usestate } from "react";
 import axios from '../../api/axios'
 import JobCard from '../../components/JobCard'
-import { Query } from 'mongoose';
 import { useLocation } from 'react-router-dom';
 
 const useQuery = () => new URLSearchParams(useLocation().search);
