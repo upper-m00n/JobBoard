@@ -42,7 +42,7 @@ Return only the HTML content.
       {
         headers: {
           Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
-          'HTTP-Referer': 'http://localhost:5173',
+          'HTTP-Referer': 'https://job-board-pied-eight.vercel.app',
           'Content-Type': 'application/json',
         },
       }
