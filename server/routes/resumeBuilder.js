@@ -1,6 +1,6 @@
 const express = require('express');
 const axios = require('axios');
-const puppeteer = require('puppeteer');
+const chromium = require('chrome-aws-lambda');
 const router = express.Router();
 
 router.post('/generate', async (req, res) => {
@@ -50,10 +50,12 @@ Return only the HTML content.
 
     const rawHtml = response.data.choices?.[0]?.message?.content;
 
-    const browser = await puppeteer.launch({
-      headless: 'new',
-      args: ['--no-sandbox', '--disable-setuid-sandbox'],
-    });
+    const browser = await chromium.puppeteer.launch({
+      args:chromium.args,
+      defaultViewport: chromium.defaultViewport,
+      executablePath: await chromium.executablePath,
+      headless: chromium.headless
+    })
 
     const page = await browser.newPage();
     await page.setContent(rawHtml, { waitUntil: 'networkidle0' });
