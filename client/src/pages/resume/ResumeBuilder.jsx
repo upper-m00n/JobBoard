@@ -3,6 +3,9 @@ import axios from '../../api/axios';
 import { FaUserGraduate, FaBriefcase, FaCode, FaLaptopCode, FaLayerGroup, FaPen } from 'react-icons/fa';
 
 export default function ResumeBuilder() {
+
+  const user= localStorage.getItem('user')
+
   const [formData, setFormData] = useState({
     fullName: "",
     education: "",
@@ -73,7 +76,7 @@ export default function ResumeBuilder() {
         <form onSubmit={handleSubmit} className="space-y-6">
           {fields.map(({ label, name, icon }) => (
             <div key={name}>
-              <label className="block font-semibold text-gray-700 mb-1 flex items-center gap-2">
+              <label className=" font-semibold text-gray-700 mb-1 flex items-center gap-2">
                 {icon} {label}
               </label>
               <textarea
@@ -87,7 +90,10 @@ export default function ResumeBuilder() {
             </div>
           ))}
 
-          <button
+          {user === null ? (<button
+            onClick={()=> navigate('/login')}
+            className="w-full bg-blue-600 text-white py-3 rounded-full font-medium hover:bg-blue-700 transition"
+          >Login to Generate Resume</button>):(<button
             type="submit"
             className={`w-full flex justify-center items-center bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition duration-200 ${
               loading ? 'opacity-70 cursor-not-allowed' : ''
@@ -121,7 +127,9 @@ export default function ResumeBuilder() {
             ) : (
               "Generate Resume"
             )}
-          </button>
+          </button>)}
+
+          
         </form>
       </div>
     </div>

@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
 import axios from "../../api/axios";
 import { Briefcase, MapPin, Clock, Building2 } from "lucide-react"; // Icons (install lucide-react if not done)
+import { useNavigate } from "react-router-dom";
 
 function JobApplyPage() {
+  const navigate = useNavigate()
+  const user= localStorage.getItem('user')
   const { jobId } = useParams();
   const location = useLocation();
   const job = location.state?.job;
@@ -106,12 +109,19 @@ function JobApplyPage() {
             />
           </div>
 
-          <button
+          { user === null ? (<button
+            onClick={()=> navigate('/login')}
+            className="w-full bg-blue-600 text-white py-3 rounded-full font-medium hover:bg-blue-700 transition"
+          >
+            Login to apply
+          </button>):(<button
             type="submit"
             className="w-full bg-blue-600 text-white py-3 rounded-full font-medium hover:bg-blue-700 transition"
           >
             Submit Application
-          </button>
+          </button>)
+          }
+          
         </form>
 
         {message && (

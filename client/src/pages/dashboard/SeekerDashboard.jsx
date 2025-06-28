@@ -40,7 +40,7 @@ export default function SeekerDashboard() {
   return (
     <div className="max-w-6xl mx-auto p-6 mt-10 bg-gradient-to-br from-white via-blue-50 to-blue-100 shadow-xl rounded-xl">
 
-      {/* Build Resume Card */}
+      
       <div className="border border-blue-300 rounded-xl p-6 mb-10 bg-blue-200/40 shadow-md">
         <h2 className="text-4xl font-bold text-blue-800 text-center mb-4">
           Build Resume with AI ✨
@@ -55,7 +55,7 @@ export default function SeekerDashboard() {
         </div>
       </div>
 
-      {/* Applications Section */}
+      
       <h2 className="text-3xl font-bold text-gray-800 mb-8">
         My Job Applications
       </h2>
@@ -102,7 +102,7 @@ export default function SeekerDashboard() {
                 {app.coverLetter}
               </p>
 
-              {/* Action Buttons */}
+              
               <div className="mt-4 flex items-center flex-wrap gap-4">
                 <a
                   href={app.resumeLink}

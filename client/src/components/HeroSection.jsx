@@ -87,6 +87,8 @@ function HeroSection() {
                 >
                   Dashboard
                 </button>
+
+                {}
                 <button
                   className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-4 rounded-full transition-all shadow-lg"
                   onClick={() => navigate('/dashboard/seeker')}
