@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "npm install && apt-get update && apt-get install -y chromium-browser",
+    "test": "npm install && apt-get update && apt-get install -y chromium-browser fonts-freefont-ttf",
     "start": "node server.js"
   },
   "keywords": [],
