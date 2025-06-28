@@ -3,7 +3,7 @@ const axios = require('axios');
 const puppeteer = require('puppeteer');
 const router = express.Router();
 
-// Optimized for Railway
+
 async function launchBrowser() {
   return await puppeteer.launch({
     args: [
@@ -25,48 +25,35 @@ router.post('/generate', async (req, res) => {
   }
 
  const prompt = `
-You're a skilled resume designer and front-end developer.
+You are a professional resume writer and designer. Generate a visually appealing, and good ATS score, modern **HTML resume** with the following details:
 
-Using the details below, generate a **clean, modern, and ATS-optimized resume** in **pure HTML with inline CSS**. Make it visually similar to a professional PDF resume, styled like a purple & white theme with a neat two-column layout.
+Full Name: {{fullName}}
+Job Title: {{jobTitle}}
+Experience: {{experience}}
+Education: {{education}}
+Projects: {{projects}}
+Skills: {{skills}}
+Additional Information: {{info}}
 
-Use the following data:
+✅ Output Requirements:
+- Return pure HTML (no markdown).
+- Include **beautiful inline CSS styling**: light background, colored section headers, consistent fonts.
+- Add padding, shadows, and clean layout.
+- Use <section> tags for "Summary", "Education", "Experience", and "Skills".
+- Ensure the layout fits on A4 size when converted to PDF.
 
-- Full Name: ${fullName}
-- Job Title: ${jobTitle}
-- Experience: ${experience}
-- Education: ${education}
-- Skills: ${skills}
-${projects ? `- Projects: ${projects}` : ''}
-${info ? `- Additional Info: ${info}` : ''}
-
-📄 **Resume Design Requirements**:
-- Output should be **pure HTML** with all **CSS inline**.
-- Layout should be **2-column** on desktop, responsive on mobile.
-  - Left column (25–30% width): Name, Contact, Skills, Links.
-  - Right column (70–75%): Education, Experience, Projects, etc.
-- Use soft **white background**, dark/gray text, and **purple for highlights/headers**.
-- Use **modern fonts** like 'Segoe UI', 'Open Sans', or 'Roboto'.
-- Add **margins**, **padding**, and **subtle shadows** for sections.
-- Use <section, <h2>, <ul> etc., for **semantic and ATS-friendly layout**.
-- Avoid using <table> or complex positioning.
-
-🖨️ **Print Requirements**:
-- Ensure content fits within **A4** without breaking sections.
-- Keep left and right margins at around 20mm.
-- Use printBackground: true when rendered to PDF.
-
-Only return valid and beautiful **HTML code**. Do not return markdown, explanations, or extra text.
+Return only the HTML content.
 `;
 
 
   try {
-    // Get HTML from AI
+    
     const response = await axios.post(
       'https://openrouter.ai/api/v1/chat/completions',
       {
-        model: 'anthropic/claude-3-haiku', // More cost-effective model
+        model: 'anthropic/claude-3-haiku', 
         messages: [{ role: 'user', content: prompt }],
-        max_tokens: 1000 // Reduced token count
+        max_tokens: 1000 
       },
       {
         headers: {
@@ -78,7 +65,7 @@ Only return valid and beautiful **HTML code**. Do not return markdown, explanati
 
     const html = response.data.choices[0].message.content;
 
-    // PDF Generation
+
     const browser = await launchBrowser();
     const page = await browser.newPage();
     
