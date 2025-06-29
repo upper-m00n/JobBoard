@@ -27,12 +27,12 @@ router.post('/generate', async (req, res) => {
  const prompt = `
 You are a professional resume writer and designer. Generate a visually appealing, and good ATS score, modern **HTML resume** with the following details:
 
-Full Name: ${{fullName}}
-Job Title: ${{jobTitle}}
-Experience: ${{experience}}
-Education: ${{education}}
-Projects: ${{projects}}
-Skills: ${{skills}}
+Full Name: ${fullName}
+Job Title: ${jobTitle}
+Experience: ${experience}
+Education: ${education}
+Projects: ${projects}
+Skills: ${skill}}
 Additional Information: ${{info}}
 
 ✅ Output Requirements:
