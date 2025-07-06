@@ -14,8 +14,8 @@ dotenv.config();
 const app = express();
 app.use(cors({
   origin: [
-    'https://job-board-pied-eight.vercel.app', // Your frontend URL
-    'http://localhost:3000' // For local development
+    'https://job-board-pied-eight.vercel.app', 
+    'http://localhost:3000' 
   ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH','DELETE', 'OPTIONS'],
