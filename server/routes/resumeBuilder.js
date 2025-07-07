@@ -32,7 +32,7 @@ Job Title: ${jobTitle}
 Experience: ${experience}
 Education: ${education}
 Projects: ${projects}
-Skills: ${skill}}
+Skills: ${skills}}
 Additional Information: ${{info}}
 
 ✅ Output Requirements:
