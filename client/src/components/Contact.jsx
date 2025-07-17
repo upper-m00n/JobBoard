@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from 'axios'
 
 export default function Contact() {
   const [form, setForm] = useState({
@@ -11,9 +12,17 @@ export default function Contact() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    alert("Thank you! Your message has been sent.");
+    try {
+        const res = await axios.post('https://jobboard-production-08c3.up.railway.app/api/contact',form)
+        alert(res.message);
+
+    } catch (error) {
+        alert(res.message);
+        console.error("Error sending email",error)
+    }
+    
     setForm({ name: "", email: "", message: "" });
   };
 

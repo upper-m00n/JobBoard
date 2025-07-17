@@ -8,6 +8,7 @@ const authRoutes = require("./routes/authRoutes");
 const jobRoutes = require('./routes/jobRoutes')
 const applicationRoutes = require('./routes/applicationRoutes')
 const resumeRoutes = require('./routes/resumeBuilder')
+const contactRoutes= require('./routes/contactRoutes')
 
 dotenv.config();
 
@@ -23,6 +24,7 @@ app.use(cors({
 }));
 app.use(express.json());
 
+app.use("/api/contact",contactRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/jobs", jobRoutes);
 app.use("/api/applications", applicationRoutes)
