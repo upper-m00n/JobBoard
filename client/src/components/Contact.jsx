@@ -34,7 +34,7 @@ export default function ContactUs() {
               value={form.name}
               onChange={handleChange}
               required
-              placeholder="John Doe"
+              placeholder="Your name"
               className="mt-1 w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
             />
           </div>
