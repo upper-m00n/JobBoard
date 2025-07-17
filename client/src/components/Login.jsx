@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "../api/axios";
 import { useAuth } from "../context/AuthContext";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -57,9 +58,7 @@ export default function Login() {
 
         <p className="mt-6 text-center text-sm text-gray-600">
           Don’t have an account?{" "}
-          <a href="/register" className="text-blue-600 font-medium hover:underline">
-            Register here
-          </a>
+          <Link to='/register' className="text-blue-600 font-medium hover:underline">Register here</Link>
         </p>
       </div>
     </div>
