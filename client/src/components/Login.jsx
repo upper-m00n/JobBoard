@@ -55,7 +55,7 @@ export default function Login() {
             Log In
           </button>
         </form>
-
+        {/* replaced <a> tag with <Link> for login to register routing*/}
         <p className="mt-6 text-center text-sm text-gray-600">
           Don’t have an account?{" "}
           <Link to='/register' className="text-blue-600 font-medium hover:underline">Register here</Link>

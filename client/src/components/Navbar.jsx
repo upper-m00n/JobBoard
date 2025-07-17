@@ -22,8 +22,18 @@ export default function Navbar() {
                     ) : (
                         <>
                             <span className='text-sm hidden sm:block font-semibold mr-4'>Welcome, {user.name}</span>
-                            {user.role === 'employer'?(<Link to='/dashboard/employer' className='hover:underline font-bold mr-2'>Dashboard</Link>
-                            ):(<Link to='/dashboard/seeker' className='hover:underline font-bold mr-2'>Dashboard</Link>)
+                            {user.role === 'employer'?(<>
+                                <Link to='/dashboard/employer' className='hover:underline font-bold mr-2'>Dashboard</Link>
+                                <Link to='/contact' className='hover:underline font-bold mr-2'>Contact Us</Link>
+                                    <Link to='/about' className='hover:underline font-bold mr-2'>About Us</Link>
+                            </>
+                            ):(
+                                <>
+                                    <Link to='/dashboard/seeker' className='hover:underline font-bold mr-2'>Dashboard</Link>
+                                    <Link to='/contact' className='hover:underline font-bold mr-2'>Contact Us</Link>
+                                    <Link to='/about' className='hover:underline font-bold mr-2'>About Us</Link>
+                                </>
+                            )
                                 }
 
                             <button onClick={handleLogout} className='bg-red-500 px-4 py-2 rounder hover:bg-red-800  rounded-full transition mr-5 '>Logout</button>

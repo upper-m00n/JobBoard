@@ -1,6 +1,7 @@
 import {FaGithub,FaLinkedin,FaEnvelope} from 'react-icons/fa'
 
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function Footer() {
     return (
@@ -15,10 +16,10 @@ function Footer() {
                 <div>
                     <h3 className="text-lg font-semibold mb-3">Quick Links</h3>
                     <ul className="space-y-2 text-sm">
-                        <li><a href="/" className="hover:text-white">Home</a></li>
-                        <li><a href="/jobs" className="hover:text-white">Browse Jobs</a></li>
-                        <li><a href="/about" className="hover:text-white">About us</a></li>
-                        <li><a href="/contact" className="hover:text-white">Contact</a></li>
+                        <li><Link to="/" className="hover:text-white">Home</Link></li>
+                        <li><Link to="/jobs" className="hover:text-white">Browse Jobs</Link></li>
+                        <li><Link to="/contact" className="hover:text-white">Contact</Link></li>
+                        <li><Link to="/about" className="hover:text-white">About Us</Link></li>
                     </ul>
                 </div>
 
