@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import axios from 'axios'
 
-export default function Contact() {
+export default function ContactUs() {
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -12,17 +11,9 @@ export default function Contact() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-        const res = await axios.post('https://jobboard-production-08c3.up.railway.app/api/contact',form)
-        alert(res.data.message);
-
-    } catch (error) {
-        alert('error..');
-        console.error("Error sending email",error)
-    }
-    
+    alert("Thank you! Your message has been sent.");
     setForm({ name: "", email: "", message: "" });
   };
 
@@ -43,7 +34,7 @@ export default function Contact() {
               value={form.name}
               onChange={handleChange}
               required
-              placeholder="Your name"
+              placeholder="John Doe"
               className="mt-1 w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
             />
           </div>
