@@ -7,7 +7,7 @@ router.post('/', async (req,res)=>{
         const {email, name, msg}= req.body;
 
         if(!email || !name || !msg){
-            return res.status(401).json({message:"Basic info is required"})
+            return res.status(400).json({message:"Basic info is required"})
         }
 
         const sendMail = await sendEmail({

@@ -19,7 +19,7 @@ export default function Contact() {
         alert(res.data.message);
 
     } catch (error) {
-        alert(res.data.message);
+        alert('error..');
         console.error("Error sending email",error)
     }
     
