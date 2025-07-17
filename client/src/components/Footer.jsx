@@ -16,6 +16,7 @@ function Footer() {
                 <div>
                     <h3 className="text-lg font-semibold mb-3">Quick Links</h3>
                     <ul className="space-y-2 text-sm">
+                        {/*fixed routing for contact us and about us*/}
                         <li><Link to="/" className="hover:text-white">Home</Link></li>
                         <li><Link to="/jobs" className="hover:text-white">Browse Jobs</Link></li>
                         <li><Link to="/contact" className="hover:text-white">Contact</Link></li>
