@@ -11,7 +11,8 @@ router.post('/', async (req,res)=>{
         }
 
         const sendMail = await sendEmail({
-            to: email,
+            to: 'ashu.toast2004@gmail.com',
+            from:email,
             subject: `Job Board Email from ${name}`,
             html:`<p>${msg}</p>`
         })
