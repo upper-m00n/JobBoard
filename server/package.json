@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "npm install && apt-get update && apt-get install -y chromium-browser fonts-freefont-ttf",
+    "build": "echo \"No build step needed\"",
     "start": "node server.js"
   },
   "keywords": [],
