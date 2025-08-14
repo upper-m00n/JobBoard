@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const API = axios.create({
-    baseURL:'https://jobboard-production-08c3.up.railway.app/api',
+    baseURL:'https://jobboard-ztsu.onrender.com/api',
 })
 
 API.interceptors.request.use((req)=>{
