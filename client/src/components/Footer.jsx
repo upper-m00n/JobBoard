@@ -5,18 +5,17 @@ import { Link } from 'react-router-dom'
 
 function Footer() {
     return (
-        <footer className="bg-gray-900 text-gray-200 py-10 mt-20">
+        <footer className="bg-black text-gray-200 py-10 mt-20">
             <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
 
                 <div>
-                    <h2 className="text-xl font-bold text-white mb-2">JobBoard</h2>
+                    <h2 className="text-xl font-bold text-white mb-2">HireReady AI</h2>
                     <p className="text-sm text-gray-400">Empowering job seekers and employers with a seamless hiring platform.</p>
                 </div>
 
                 <div>
                     <h3 className="text-lg font-semibold mb-3">Quick Links</h3>
                     <ul className="space-y-2 text-sm">
-                        {/*fixed routing for contact us and about us*/}
                         <li><Link to="/" className="hover:text-white">Home</Link></li>
                         <li><Link to="/jobs" className="hover:text-white">Browse Jobs</Link></li>
                         <li><Link to="/contact" className="hover:text-white">Contact</Link></li>
@@ -44,7 +43,7 @@ function Footer() {
             </div>
 
             <div className="border-t border-gray-700 mt-10 pt-4 text-center text-sm text-gray-500">
-                © {new Date().getFullYear()} JobBoard. All rights reserved.
+                © {new Date().getFullYear()} HireReady AI. All rights reserved.
             </div>
 
         </footer>

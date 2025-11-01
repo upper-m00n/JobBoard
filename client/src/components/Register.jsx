@@ -20,13 +20,14 @@ export default function Register() {
       navigate('/login');
     } catch (error) {
       alert(error.response?.data?.error || 'Registration failed');
+      console.log("registration error",error)
     }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-blue-200">
       <div className="bg-white p-10 rounded-xl shadow-xl w-full max-w-md">
-        <h1 className="text-3xl font-bold text-center text-blue-700 mb-1">JobBoard</h1>
+        <h1 className="text-3xl font-bold text-center text-blue-700 mb-1">HireReady AI</h1>
         <p className="text-sm text-center text-gray-500 mb-6">Create your account to get started</p>
 
         <form onSubmit={handleSubmit} className="space-y-4">

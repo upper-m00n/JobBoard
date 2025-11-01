@@ -11,8 +11,8 @@ export default function Navbar() {
     }
 
     return (
-        <nav className='bg-gray-900 p-4 text-white flex justify-between items-center'>
-            <Link to='/' className='text-2xl font-bold'>JobBoard</Link>
+        <nav className='bg-black p-4 text-white flex justify-between items-center'>
+            <Link to='/' className='text-2xl font-bold'>HireReady AI</Link>
             <div className='flex gap-4 items-center'>
                 {!user?(
                     <>

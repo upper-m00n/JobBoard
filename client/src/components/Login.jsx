@@ -24,7 +24,7 @@ export default function Login() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-blue-200">
       <div className="bg-white p-10 rounded-xl shadow-xl w-full max-w-md">
-        <h1 className="text-3xl font-bold text-center text-blue-700 mb-2">JobBoard</h1>
+        <h1 className="text-3xl font-bold text-center text-blue-700 mb-2">HireReady AI</h1>
         <p className="text-sm text-center text-gray-500 mb-6">Log in to access your dashboard</p>
 
         <form onSubmit={handlesubmit} className="space-y-4">

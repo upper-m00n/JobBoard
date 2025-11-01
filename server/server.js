@@ -1,4 +1,3 @@
-// server.js
 require('dotenv').config()
 const express = require("express");
 const mongoose = require("mongoose");
@@ -8,7 +7,7 @@ const authRoutes = require("./routes/authRoutes");
 const jobRoutes = require('./routes/jobRoutes')
 const applicationRoutes = require('./routes/applicationRoutes')
 const resumeRoutes = require('./routes/resumeBuilder')
-
+const interviewRoutes=require('./routes/interviewRoutes');
 
 dotenv.config();
 
@@ -16,7 +15,7 @@ const app = express();
 app.use(cors({
   origin: [
     'https://job-board-pied-eight.vercel.app', 
-    'http://localhost:3000' 
+    'http://localhost:5173'
   ],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH','DELETE', 'OPTIONS'],
@@ -27,8 +26,9 @@ app.use(express.json());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/jobs", jobRoutes);
-app.use("/api/applications", applicationRoutes)
-app.use("/api/resume", resumeRoutes)
+app.use("/api/applications", applicationRoutes);
+app.use("/api/resume", resumeRoutes);
+app.use('/api/interview',interviewRoutes);
 
 const PORT = process.env.PORT || 5000;
 
