@@ -14,7 +14,7 @@ import Footer from "./components/Footer"
 import ResumeBuilder from "./pages/resume/ResumeBuilder"
 import About from "./components/About"
 import Contact from "./components/Contact"
-import InterviewCoach from "./pages/interviewCoach/interviewCoach"
+import InterviewCoach from "./pages/interviewCoach/InterviewCoach"
 
 function App() {
   return (
