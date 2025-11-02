@@ -1,25 +1,57 @@
-import {useNavigate} from 'react-router-dom'
+import { Link } from "react-router-dom"
+import { MapPin, Briefcase, DollarSign } from "lucide-react"
 
-export default function JobCard({job}){
+export default function JobCard({ job }) {
+  return (
+    <Link to={`/job/${job._id}`}>
+      <div className="bg-white border border-slate-200 rounded-lg hover:shadow-lg transition-shadow p-6">
+        <div className="flex items-start justify-between mb-4">
+          <div>
+            <h3 className="text-xl font-semibold text-slate-900">{job.title}</h3>
+            <p className="text-slate-600">{job.company}</p>
+          </div>
+          {job.type && (
+            <span className="px-3 py-1 bg-blue-100 text-blue-700 text-sm font-medium rounded-full">{job.type}</span>
+          )}
+        </div>
 
-    const navigate=useNavigate();
+        <p className="text-slate-600 mb-4 line-clamp-2">{job.description}</p>
 
-    const handleApplyClick= () =>{
-        navigate(`/jobs/${job._id}/apply`,{
-            state:{job},
-        })
-    }
+        <div className="flex flex-wrap gap-4 text-sm text-slate-600 mb-4">
+          {job.location && (
+            <div className="flex items-center gap-1">
+              <MapPin className="w-4 h-4" />
+              {job.location}
+            </div>
+          )}
+          {job.salary && (
+            <div className="flex items-center gap-1">
+              <DollarSign className="w-4 h-4" />
+              {job.salary}
+            </div>
+          )}
+          {job.experience && (
+            <div className="flex items-center gap-1">
+              <Briefcase className="w-4 h-4" />
+              {job.experience}
+            </div>
+          )}
+        </div>
 
-    return(
-        <div className="p-6 border bg-gray-300 rounded shadow hover:shadow-black transition">
-            <h2 className="text-xl font-semibold text-blue-700">{job.title}</h2>
-            <p className="text-gray-700">{job.company}</p>
-            <p className="text-sm text-gray-500">{job.location} • {job.type}</p>
-            <p className="text-xs text-gray-800 mt-1">
-                Posted on {new Date(job.createdAt).toLocaleDateString()}
-            </p>
-            <button onClick={handleApplyClick} 
-            className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm">Apply Now</button>
+        <div className="flex gap-2 flex-wrap">
+          {job.skills &&
+            job.skills.slice(0, 3).map((skill, idx) => (
+              <span key={idx} className="px-3 py-1 bg-slate-100 text-slate-700 text-xs rounded-md">
+                {skill}
+              </span>
+            ))}
+          {job.skills && job.skills.length > 3 && (
+            <span className="px-3 py-1 bg-slate-100 text-slate-700 text-xs rounded-md">
+              +{job.skills.length - 3} more
+            </span>
+          )}
+        </div>
       </div>
-    )
+    </Link>
+  )
 }

@@ -74,8 +74,6 @@ export default function Register() {
             Register
           </button>
         </form>
-        {/* replaced <a> tag with <Link> for register to login routing*/}
-
         <p className="mt-6 text-center text-sm text-gray-600">
           Already have an account?{' '}
            <Link to='/login' className="text-blue-600 font-medium hover:underline">Login here</Link>

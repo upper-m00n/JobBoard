@@ -20,7 +20,7 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-100">
       <Navbar/>
-      <div className="p-4 max-w-4xl mx-auto">
+      <div className="mx-auto">
         <Routes>
           <Route path='/' element={<Home/>}/>
           <Route path="/login" element={<Login/>}/>
