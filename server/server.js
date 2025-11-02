@@ -6,7 +6,7 @@ const cors = require("cors");
 const authRoutes = require("./routes/authRoutes");
 const jobRoutes = require('./routes/jobRoutes')
 const applicationRoutes = require('./routes/applicationRoutes')
-const resumeRoutes = require('./routes/resumeBuilder')
+const resumeRoutes = require('./routes/resume.routes')
 const interviewRoutes=require('./routes/interviewRoutes');
 
 dotenv.config();
