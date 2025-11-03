@@ -15,6 +15,7 @@ import ResumeBuilder from "./pages/resume/ResumeBuilder"
 import About from "./components/About"
 import Contact from "./components/Contact"
 import InterviewCoach from "./pages/interviewCoach/InterviewCoach"
+import InterviewReport from "./pages/interviewCoach/InterviewReport"
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           <Route path='/dashboard/employer/jobApplications/:jobId' element={<JobApplications/>}/>
           <Route path='/resume-builder' element={<ResumeBuilder/>}/>
           <Route path='/interview' element={<InterviewCoach/>}/>
+          <Route path='/interview/report/:sessionId' element={<InterviewReport/>}/>
           <Route path='/about' element={<About/>}/>
           <Route path='/contact' element={<Contact/>}/>
         </Routes>

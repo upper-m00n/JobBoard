@@ -1,141 +1,102 @@
-import React, { useEffect, useState } from "react";
-import axios from "../../api/axios";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
-import{FaFileAlt, FaEdit, FaTrash} from 'react-icons/fa'
+import React, { useEffect, useState } from 'react';
+import axios from '../../api/axios'; 
+import { Link } from 'react-router-dom';
+import { ClockIcon, BriefcaseIcon, DocumentTextIcon } from '@heroicons/react/24/outline';
 
-export default function SeekerDashboard() {
-  const [applications, setApplications] = useState([]);
-  const navigate = useNavigate();
+function formatDate(dateString) {
+  return new Date(dateString).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
+
+function SeekerDashboard() {
+  const [reports, setReports] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchApps = async () => {
+    const fetchDashboard = async () => {
       try {
-        const token = localStorage.getItem("token");
-        const res = await axios.get("/applications/my-applications", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setApplications(res.data);
+        setIsLoading(true);
+        const response = await axios.get('/dashboard/reports');
+        console.log("reports",response)
+        setReports(response.data);
+
       } catch (err) {
-        console.error(err);
+        console.error("Failed to fetch dashboard:", err);
+        setError("Could not load your reports. Please try again.");
+      } finally {
+        setIsLoading(false);
       }
     };
-    fetchApps();
+    fetchDashboard();
   }, []);
 
-  const handleDelete = async (id) => {
-    if (!window.confirm("Are you sure you want to delete this application?")) return;
+  if (isLoading) {
+    return <div className="text-center p-10">Loading Your Dashboard...</div>;
+  }
 
-    try {
-      const token = localStorage.getItem("token");
-      await axios.delete(`/applications/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setApplications(applications.filter((app) => app._id !== id));
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  if (error) {
+    return <div className="text-center p-10 text-red-500">{error}</div>;
+  }
 
   return (
-    <div className="max-w-6xl mx-auto p-6 mt-10 bg-gradient-to-br from-white via-blue-50 to-blue-100 shadow-xl rounded-xl">
+    <div className="max-w-5xl mx-auto p-6 my-10">
+      <h1 className="text-4xl font-bold text-slate-800 mb-8">My Interview Dashboard</h1>
 
-      
-      <div className="border border-blue-300 rounded-xl p-6 mb-10 bg-blue-200/40 shadow-md">
-        <h2 className="text-4xl font-bold text-blue-800 text-center mb-4">
-          Build Resume with AI ✨
-        </h2>
-        <div className="text-center">
+      {reports.length === 0 ? (
+
+        <div className="text-center bg-white p-10 rounded-lg shadow-md border">
+          <DocumentTextIcon className="h-16 w-16 text-gray-400 mx-auto mb-4" />
+          <h2 className="text-2xl font-semibold text-gray-700 mb-2">No Reports Found</h2>
+          <p className="text-gray-500 mb-6">
+            You haven't completed any interviews yet.
+          </p>
           <Link
-            to="/resume-builder"
-            className="inline-block bg-blue-600 hover:bg-blue-700 text-white text-lg font-semibold px-8 py-3 rounded-full shadow transition"
+            to="/interview"
+            className="bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
           >
-            Build Resume
+            Start Your First Interview
           </Link>
         </div>
-      </div>
-
-      
-      <h2 className="text-3xl font-bold text-gray-800 mb-8">
-        My Job Applications
-      </h2>
-
-      {applications.length === 0 ? (
-        <p className="text-gray-600 text-lg text-center">
-          You haven’t applied to any jobs yet.
-        </p>
       ) : (
-        <div className="grid gap-6">
-          {applications.map((app) => (
-            <div
-              key={app._id}
-              className="bg-white rounded-xl border border-gray-200 p-6 shadow hover:shadow-lg transition"
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {reports.map((report) => (
+            <Link
+              to={`/interview/report/${report._id}`}
+              key={report._id}
+              className="block bg-white p-6 rounded-lg shadow-md border border-gray-200 hover:shadow-lg hover:border-blue-500 transition-all"
             >
-              <div className="flex justify-between items-start mb-4">
-                <div>
-                  <h3 className="text-xl font-semibold text-gray-800">
-                    {app.job?.title}
-                  </h3>
-                  <p className="text-gray-700">{app.job?.company}</p>
-                  <p className="text-sm text-gray-500">
-                    {app.job?.type} | {app.job?.location}
-                  </p>
+              <div className="flex items-center text-gray-500 text-sm mb-3">
+                <BriefcaseIcon className="h-5 w-5 mr-2" />
+                <span>{report.jobDescription}</span>
+              </div>
+              <h3 className="text-2xl font-semibold text-slate-800 mb-3">
+                Interview Report
+              </h3>
+              <p className="text-gray-600 text-sm mb-4">
+                {report.finalReportSummary 
+                  ? `${report.finalReportSummary.substring(0, 100)}...`
+                  : "Report is still being generated."}
+              </p>
+              <div className="flex items-center justify-between text-sm">
+                <div className="flex items-center text-gray-500">
+                  <ClockIcon className="h-4 w-4 mr-1.5" />
+                  <span>Completed: {formatDate(report.createdAt)}</span>
                 </div>
-                <span
-                  className={`text-xs font-semibold px-3 py-1 rounded-full ${
-                    app.status === "accepted"
-                      ? "bg-green-100 text-green-700"
-                      : app.status === "rejected"
-                      ? "bg-red-100 text-red-700"
-                      : "bg-yellow-100 text-yellow-700"
-                  }`}
-                >
-                  {app.status}
+                <span className="text-blue-600 font-semibold">
+                  View Report &rarr;
                 </span>
               </div>
-
-              
-              <p>{app.name}</p>
-              <p>{app.email}</p>
-              <p className="text-gray-800 text-sm">
-                <span className="font-medium text-gray-900">Cover Letter:</span>{" "}
-                {app.coverLetter}
-              </p>
-
-              
-              <div className="mt-4 flex items-center flex-wrap gap-4">
-                <a
-                  href={app.resumeLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 font-medium text-sm underline"
-                >
-                  <FaFileAlt /> View Resume
-                </a>
-
-                <button
-                  onClick={() => navigate(`applications/update/${app._id}`)}
-                  className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-1.5 text-sm rounded-md transition"
-                >
-                  <FaEdit /> Update
-                </button>
-
-                <button
-                  onClick={() => handleDelete(app._id)}
-                  className="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white px-4 py-1.5 text-sm rounded-md transition"
-                >
-                  <FaTrash /> Delete
-                </button>
-              </div>
-
-              <p className="text-xs text-gray-400 mt-3">
-                Applied on {new Date(app.createdAt).toLocaleDateString()}
-              </p>
-            </div>
+            </Link>
           ))}
         </div>
       )}
     </div>
-
   );
 }
+
+export default SeekerDashboard;

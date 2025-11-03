@@ -2,6 +2,7 @@
 
 import { useState, useRef } from "react"
 import axios from "../../api/axios"
+import { Link } from "react-router-dom"
 
 const InterviewCoach = () => {
   const [isLoading, setIsLoading] = useState(false)
@@ -96,24 +97,23 @@ const InterviewCoach = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 py-12 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-200 py-12 px-4">
       <div className="max-w-2xl mx-auto">
-        <div className="backdrop-blur-md bg-white/10 border border-white/20 rounded-2xl shadow-2xl p-8">
-          {/* Header */}
+        <div className="bg-white rounded-2xl shadow-sm border p-8">
+
           <div className="mb-8">
-            <h1 className="text-4xl font-bold text-white mb-2">AI Interview Coach</h1>
-            <p className="text-slate-300 text-sm">Practice interviews with AI-powered feedback</p>
+            <h1 className="text-4xl font-bold text-slate-900 mb-2">AI Interview Coach</h1>
+            <p className="text-slate-600 text-sm">Practice interviews with AI-powered feedback</p>
           </div>
 
-          {/* Job Description Input */}
           <div className="mb-6">
-            <label htmlFor="jd" className="block text-sm font-semibold text-slate-200 mb-3">
-              Job Description
+            <label htmlFor="jd" className="block text-sm font-semibold text-slate-700 mb-3">
+              Job Description or Role
             </label>
             <textarea
               id="jd"
               name="jd"
-              className="w-full px-4 py-3 rounded-xl bg-slate-800/50 border border-slate-600/30 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-transparent transition-all duration-200 min-h-[90px] resize-none"
+              className="w-full px-4 py-3 rounded-xl bg-slate-50 border text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/50 focus:border-indigo-300 transition-all duration-200 min-h-[90px] resize-none"
               placeholder='E.g., "Senior React Developer with 5 years experience..."'
               onChange={(e) => setJobDescription(e.target.value)}
               value={jobDescription}
@@ -121,21 +121,20 @@ const InterviewCoach = () => {
             />
           </div>
 
-          {/* Messages Container */}
-          <div className="border border-slate-600/30 rounded-xl p-5 h-[450px] overflow-y-auto mb-6 bg-slate-800/30 flex flex-col gap-4">
+          <div className="border rounded-xl p-5 h-[450px] overflow-y-auto mb-6 bg-slate-50/50 flex flex-col gap-4">
             {messages.length === 0 && (
               <div className="flex items-center justify-center h-full">
-                <p className="text-slate-400 text-center">Click "Start Interview" to begin your practice session.</p>
+                <p className="text-slate-500 text-center">Click "Start Interview" to begin your practice session.</p>
               </div>
             )}
 
             {messages.map((msg, index) => (
               <div key={index} className={`flex ${msg.type === "user" ? "justify-end" : "justify-start"}`}>
                 <div
-                  className={`max-w-xs px-5 py-3 rounded-2xl shadow-lg transition-all duration-200 ${
+                  className={`max-w-xs px-5 py-3 rounded-2xl transition-all duration-200 ${
                     msg.type === "user"
-                      ? "bg-blue-600 text-white rounded-br-none shadow-blue-500/20"
-                      : "bg-slate-700 text-slate-100 rounded-bl-none shadow-slate-900/50"
+                      ? "bg-indigo-600 text-white rounded-br-none shadow-sm shadow-indigo-200"
+                      : "bg-slate-200 text-slate-900 rounded-bl-none shadow-sm shadow-slate-300"
                   }`}
                 >
                   <p className="text-xs font-semibold mb-1 opacity-75">{msg.type === "user" ? "You" : "AI Coach"}</p>
@@ -147,37 +146,44 @@ const InterviewCoach = () => {
             {isLoading && (
               <div className="flex justify-center items-center py-4">
                 <div className="flex gap-2">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
-                  <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse delay-100"></div>
-                  <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse delay-200"></div>
+                  <div className="w-2 h-2 bg-indigo-500 rounded-full animate-pulse"></div>
+                  <div className="w-2 h-2 bg-indigo-500 rounded-full animate-pulse delay-100"></div>
+                  <div className="w-2 h-2 bg-indigo-500 rounded-full animate-pulse delay-200"></div>
                 </div>
-                <p className="text-slate-400 text-sm ml-3">AI is thinking...</p>
+                <p className="text-slate-500 text-sm ml-3">AI is thinking...</p>
               </div>
             )}
           </div>
 
-          {/* Action Button */}
-          <div className="flex gap-3">
+          <div className="flex gap-3 flex-col">
             {!isInterviewStarted ? (
               <button
                 onClick={startInterview}
                 disabled={isLoading}
-                className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 shadow-lg shadow-blue-500/30 hover:shadow-blue-500/50"
+                className="w-full bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold py-3 px-6 rounded-xl transition-all duration-200 shadow-md shadow-indigo-200 hover:shadow-lg hover:shadow-indigo-300"
               >
                 {isLoading ? "Starting..." : "Start Interview"}
               </button>
             ) : (
-              <button
-                onClick={toggleRecording}
-                disabled={isLoading}
-                className={`w-full font-semibold py-3 px-6 rounded-xl transition-all duration-200 shadow-lg disabled:opacity-50 disabled:cursor-not-allowed ${
-                  isRecording
-                    ? "bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white shadow-red-500/30 hover:shadow-red-500/50"
-                    : "bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white shadow-green-500/30 hover:shadow-green-500/50"
-                }`}
-              >
-                {isLoading ? "Processing..." : isRecording ? "⏹ Stop Recording" : "🎤 Record Answer"}
-              </button>
+              <>
+                <button
+                  onClick={toggleRecording}
+                  disabled={isLoading}
+                  className={`w-full font-semibold py-3 px-6 rounded-xl transition-all duration-200 shadow-md disabled:opacity-50 disabled:cursor-not-allowed ${
+                    isRecording
+                      ? "bg-red-500 hover:bg-red-600 text-white shadow-red-200 hover:shadow-lg hover:shadow-red-300"
+                      : "bg-emerald-600 hover:bg-emerald-700 text-white shadow-emerald-200 hover:shadow-lg hover:shadow-emerald-300"
+                  }`}
+                >
+                  {isLoading ? "Processing..." : isRecording ? "⏹ Stop Recording" : "🎤 Record Answer"}
+                </button>
+                <Link
+                  to={`/interview/report/${sessionId}`}
+                  className="block w-full text-center bg-slate-200 hover:bg-slate-300 text-slate-900 py-3 px-5 rounded-xl font-semibold transition-all duration-200"
+                >
+                  Finish Interview & See Report
+                </Link>
+              </>
             )}
           </div>
         </div>
