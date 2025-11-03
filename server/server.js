@@ -8,6 +8,7 @@ const jobRoutes = require('./routes/jobRoutes')
 const applicationRoutes = require('./routes/applicationRoutes')
 const resumeRoutes = require('./routes/resume.routes')
 const interviewRoutes=require('./routes/interviewRoutes');
+const userDashboardRoutes=require('./routes/userDashboardRoutes')
 
 dotenv.config();
 
@@ -29,6 +30,7 @@ app.use("/api/jobs", jobRoutes);
 app.use("/api/applications", applicationRoutes);
 app.use("/api/resume", resumeRoutes);
 app.use('/api/interview',interviewRoutes);
+app.use("/api/dashboard",userDashboardRoutes)
 
 const PORT = process.env.PORT || 5000;
 
