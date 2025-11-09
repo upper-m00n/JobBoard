@@ -21,7 +21,7 @@ function SeekerDashboard() {
       try {
         setIsLoading(true);
         const response = await axios.get('/dashboard/reports');
-        console.log("reports",response)
+        console.log("reports",response.data)
         setReports(response.data);
 
       } catch (err) {

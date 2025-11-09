@@ -13,6 +13,7 @@ const userDashboardRoutes=require('./routes/userDashboardRoutes')
 dotenv.config();
 
 const app = express();
+
 app.use(cors({
   origin: [
     'https://job-board-pied-eight.vercel.app', 
@@ -23,6 +24,7 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 
 app.use("/api/auth", authRoutes);

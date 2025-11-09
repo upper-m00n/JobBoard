@@ -9,25 +9,35 @@ const FILLER_WORDS= new Set([
 ]);
 
 function analyzeTone(text){
-    if(!text) return 0;
-    const tokens = text.toLowerCase().split(/\s+/);
-    return analyzer.getSentiment(tokens);
+    try {
+        if(!text) return 0;
+        const tokens = text.toLowerCase().split(/\s+/);
+        return analyzer.getSentiment(tokens);
+    } catch (error) {
+        console.error("Error in analyzeTone:", e.message);
+        return 0;
+    }
 }
 
 function analyzeConfidence(text){
-    if (!text) return { fillerWordCount: 0, wordCount: 0 };
-    const words = text.toLowerCase().split(/\s+/);
+    try {
+        if (!text) return { fillerWordCount: 0, wordCount: 0 };
+        const words = text.toLowerCase().split(/\s+/);
 
-    let fillerWordCount = 0;
+        let fillerWordCount = 0;
 
-    words.forEach(word => {
-        const cleanWord = word.replace(/[.,?!]/g, '');
-        if (FILLER_WORDS.has(cleanWord)) {
-        fillerWordCount++;
+        words.forEach(word => {
+            const cleanWord = word.replace(/[.,?!]/g, '');
+            if (FILLER_WORDS.has(cleanWord)) {
+            fillerWordCount++;
+        }
+        });
+
+        return {fillerWordCount, wordCount:words.length};
+    } catch (error) {
+        console.error("Error in analyzeConfidence:", e.message);
+        return { fillerWordCount: 0, wordCount: 0 };
     }
-    });
-
-    return {fillerWordCount, wordCount:words.length};
 }
 
 module.exports={analyzeTone,analyzeConfidence};

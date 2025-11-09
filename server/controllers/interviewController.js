@@ -4,7 +4,7 @@ const {analyzeConfidence,analyzeTone}=require('../utils/analysisHelper');
 const InterviewSession = require('../models/InterviewSessions.model');
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const model = genAI.getGenerativeModel({ model:"gemini-2.5-pro" });
+const model = genAI.getGenerativeModel({ model:"gemini-2.5-flash" });
 
 async function transcribeAudio(audioBuffer) {
   try {
@@ -38,8 +38,6 @@ async function transcribeAudio(audioBuffer) {
   }
 }
 
-
-
 async function startInterview(req, res) {
     try {
         const {jobDescription}=req.body;
@@ -57,6 +55,7 @@ async function startInterview(req, res) {
         const firstQuestion = result.response.text();
 
         const newSession= new InterviewSession({
+            userId:userId,
             jobDescription: jobDescription || "General",
             answers:[{
                 questionText:firstQuestion,
@@ -104,6 +103,14 @@ async function feedbackAndNextQuestion(req,res) {
 
         const {fillerWordCount, wordCount}= analyzeConfidence(userTranscript);
 
+        // console.log("=====================================");
+        // console.log("ANALYSIS RESULTS FOR NEW ANSWER:");
+        // console.log("Transcript:", userTranscript);
+        // console.log("Tone Score:", toneScore); 
+        // console.log("Filler Words:", fillerWordCount); 
+        // console.log("Word Count:", wordCount);
+        // console.log("=====================================");
+
         const prompt = `
             The interview question was: "${currentQuestion}"
             The candidate's answer was: "${userTranscript}"
@@ -125,9 +132,9 @@ async function feedbackAndNextQuestion(req,res) {
         session.answers[lastAnswerIndex].answerText = userTranscript;
         session.answers[lastAnswerIndex].critique= aiResponseJson.critique;
         session.answers[lastAnswerIndex].contentAnalysis = aiResponseJson.contentAnalysis;
-        session.answers[lastAnswerIndex].toneScore = aiResponseJson.toneScore;
-        session.answers[lastAnswerIndex].fillerWordCount = aiResponseJson.fillerWordCount;
-        session.answers[lastAnswerIndex].wordCount = aiResponseJson.wordCount;
+        session.answers[lastAnswerIndex].toneScore = toneScore;
+        session.answers[lastAnswerIndex].fillerWordCount=fillerWordCount;
+        session.answers[lastAnswerIndex].wordCount = wordCount;
 
         session.answers.push({
             questionText:aiResponseJson.nextQuestion

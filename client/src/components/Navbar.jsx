@@ -1,5 +1,3 @@
-"use client"
-
 import { Link, useNavigate } from "react-router-dom"
 import { useAuth } from "../context/AuthContext"
 import { Menu, X, LogOut, Home } from "lucide-react"
@@ -16,7 +14,7 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="sticky top-0 z-50 bg-slate-950 bg-opacity-95 backdrop-blur-md border-b border-slate-800 text-white">
+    <nav className="sticky top-0 z-50 bg-black bg-opacity-30 backdrop-blur-sm text-white">
       <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
         <Link
           to="/"
@@ -31,7 +29,7 @@ export default function Navbar() {
             <>
               <Link
                 to="/login"
-                className="text-slate-300 hover:text-white font-medium transition-colors duration-200 relative group"
+                className="text-slate-700 hover:text-white font-medium transition-colors duration-200 relative group"
               >
                 Login
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-indigo-600 group-hover:w-full transition-all duration-300"></span>
@@ -48,21 +46,21 @@ export default function Navbar() {
               <span className="text-sm font-semibold text-slate-300">Welcome, {user.name}</span>
               <Link
                 to={user.role === "employer" ? "/dashboard/employer" : "/dashboard/seeker"}
-                className="text-slate-300 hover:text-white font-medium transition-colors duration-200 relative group"
+                className="text-slate-900 hover:text-white font-medium transition-colors duration-200 relative group"
               >
                 Dashboard
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-indigo-600 group-hover:w-full transition-all duration-300"></span>
               </Link>
               <Link
                 to="/contact"
-                className="text-slate-300 hover:text-white font-medium transition-colors duration-200 relative group"
+                className="text-slate-900 hover:text-white font-medium transition-colors duration-200 relative group"
               >
                 Contact
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-indigo-600 group-hover:w-full transition-all duration-300"></span>
               </Link>
               <Link
                 to="/about"
-                className="text-slate-300 hover:text-white font-medium transition-colors duration-200 relative group"
+                className="text-slate-900 hover:text-white font-medium transition-colors duration-200 relative group"
               >
                 About
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-indigo-600 group-hover:w-full transition-all duration-300"></span>
@@ -87,7 +85,7 @@ export default function Navbar() {
       </div>
 
       {isOpen && (
-        <div className="md:hidden bg-slate-900 border-t border-slate-800 px-4 py-4 space-y-3">
+        <div className="md:hidden bg-black bg-opacity-30 backdrop:blur-sm border-t border-slate-800 px-4 py-4 space-y-3">
           {!user ? (
             <>
               <Link

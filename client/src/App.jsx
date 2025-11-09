@@ -16,6 +16,7 @@ import About from "./components/About"
 import Contact from "./components/Contact"
 import InterviewCoach from "./pages/interviewCoach/InterviewCoach"
 import InterviewReport from "./pages/interviewCoach/InterviewReport"
+import ATScheck from "./pages/resume/ATSCheck"
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           <Route path='/dashboard/seeker/applications/update/:applicationId' element={<UpdateApplicationPage/>}/>
           <Route path='/dashboard/employer/jobApplications/:jobId' element={<JobApplications/>}/>
           <Route path='/resume-builder' element={<ResumeBuilder/>}/>
+          <Route path='/ats-check' element={<ATScheck/>}/>
           <Route path='/interview' element={<InterviewCoach/>}/>
           <Route path='/interview/report/:sessionId' element={<InterviewReport/>}/>
           <Route path='/about' element={<About/>}/>
