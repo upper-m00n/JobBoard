@@ -4,11 +4,12 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const authRoutes = require("./routes/authRoutes");
-const jobRoutes = require('./routes/jobRoutes')
 const applicationRoutes = require('./routes/applicationRoutes')
 const resumeRoutes = require('./routes/resume.routes')
 const interviewRoutes=require('./routes/interviewRoutes');
 const userDashboardRoutes=require('./routes/userDashboardRoutes')
+const trackerRoutes=require('./routes/tracker.routes');
+const aggregatorRoutes=require('./routes/aggregator.routes');
 
 dotenv.config();
 
@@ -28,8 +29,9 @@ app.use(express.urlencoded({ extended: true }));
 
 
 app.use("/api/auth", authRoutes);
-app.use("/api/jobs", jobRoutes);
 app.use("/api/applications", applicationRoutes);
+app.use("/api/tracker",trackerRoutes);
+app.use('/api/aggregate',aggregatorRoutes);
 app.use("/api/resume", resumeRoutes);
 app.use('/api/interview',interviewRoutes);
 app.use("/api/dashboard",userDashboardRoutes)

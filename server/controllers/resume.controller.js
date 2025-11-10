@@ -1,5 +1,5 @@
 const { GoogleGenerativeAI } = require("@google/generative-ai");
-const puppeteer = require("puppeteer");
+const puppeteer = require("puppeteer-extra");
 const pdf = require('pdf-parse-new')
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
