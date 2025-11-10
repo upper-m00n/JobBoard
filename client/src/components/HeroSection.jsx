@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { motion } from "framer-motion"
-import { Search, Briefcase, FileText, MessageSquare, Sparkles } from "lucide-react"
+import { Search, Briefcase, FileText, MessageSquare, Sparkles,Check } from "lucide-react"
 
 function HeroSection() {
   const navigate = useNavigate()
@@ -12,19 +12,18 @@ function HeroSection() {
 
   const handleSearch = () => {
     if (searchTerm.trim()) {
-      navigate(`/jobs?search=${encodeURIComponent(searchTerm.trim())}`)
+      navigate(`/job-search?search=${encodeURIComponent(searchTerm.trim())}`)
     } else {
-      navigate("/jobs")
+      navigate("/job-search")
     }
   }
 
   const navigationButtons = [
-    { label: "Browse Jobs", icon: Briefcase, action: () => navigate("/jobs"), role: "all" },
+    { label: "Browse Jobs", icon: Briefcase, action: () => navigate("/job-search"), role: "all" },
     { label: "AI Resume Builder", icon: FileText, action: () => navigate("/resume-builder"), role: "all" },
     { label: "Dashboard", icon: Briefcase, action: () => navigate("/dashboard/seeker"), role: "seeker" },
-    { label: "Applications", icon: MessageSquare, action: () => navigate("/dashboard/seeker"), role: "seeker" },
     { label: "Interview Practice", icon: MessageSquare, action: () => navigate("/interview"), role: "seeker" },
-    { label: "Employer Dashboard", icon: Briefcase, action: () => navigate("/dashboard/employer"), role: "employer" },
+    { label: "ATS check", icon: Check, action: () => navigate("/ats-check"), role: "seeker" },
     { label: "Your Postings", icon: Briefcase, action: () => navigate("/dashboard/employer"), role: "employer" },
   ]
 

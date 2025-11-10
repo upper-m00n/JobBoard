@@ -16,6 +16,7 @@
     "@tailwindcss/vite": "^4.1.16",
     "appwrite": "^18.1.1",
     "axios": "^1.10.0",
+    "cheerio": "^1.1.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "firebase-admin": "^13.4.0",

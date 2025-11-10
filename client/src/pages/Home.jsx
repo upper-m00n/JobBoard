@@ -11,17 +11,17 @@ export default function Home() {
   const [jobs, setJobs] = useState([])
   const user = JSON.parse(localStorage.getItem("user"))
 
-  useEffect(() => {
-    const fetchJobs = async () => {
-      try {
-        const res = await axios.get("/jobs")
-        setJobs(res.data)
-      } catch (err) {
-        console.error("Failed to fetch jobs", err)
-      }
-    }
-    fetchJobs()
-  }, [])
+  // useEffect(() => {
+  //   const fetchJobs = async () => {
+  //     try {
+  //       const res = await axios.get("/jobs")
+  //       setJobs(res.data)
+  //     } catch (err) {
+  //       console.error("Failed to fetch jobs", err)
+  //     }
+  //   }
+  //   fetchJobs()
+  // }, [])
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -124,7 +124,7 @@ export default function Home() {
             className="bg-gradient-to-br from-white via-indigo-50/10 to-slate-50 rounded-2xl border border-border overflow-hidden shadow-sm hover:shadow-lg transition-all"
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-8 md:p-12 lg:p-16 items-center">
-              {/* Text Content */}
+              
               <div className="space-y-6">
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
@@ -211,7 +211,6 @@ export default function Home() {
                 </motion.div>
               </div>
 
-              {/* Visual Element */}
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -348,7 +347,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-20 px-6 bg-slate-50/50">
+      {/* <section className="py-20 px-6 bg-slate-50/50">
         <div className="max-w-6xl mx-auto">
           <div className="mb-12">
             <h2 className="text-4xl font-bold text-foreground">Featured Opportunities</h2>
@@ -385,7 +384,7 @@ export default function Home() {
             </Link>
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   )
 }

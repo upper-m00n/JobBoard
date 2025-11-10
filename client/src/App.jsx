@@ -2,14 +2,8 @@ import { Routes, Route } from "react-router-dom"
 import Navbar from './components/Navbar'
 import Login from "./components/Login"
 import Register from "./components/Register"
-import JobList from "./pages/jobs/JobList"
-import PostJob from "./pages/jobs/PostJobs"
-import EmployerDashboard from "./pages/dashboard/EmployerDashBoard"
 import Home from "./pages/Home"
-import JobApplyPage from "./pages/jobs/JobApplyPage"
 import SeekerDashboard from "./pages/dashboard/SeekerDashboard"
-import UpdateApplicationPage from "./pages/jobs/UpdateApplicationPage"
-import JobApplications from "./pages/jobs/JobApplications"
 import Footer from "./components/Footer"
 import ResumeBuilder from "./pages/resume/ResumeBuilder"
 import About from "./components/About"
@@ -17,6 +11,8 @@ import Contact from "./components/Contact"
 import InterviewCoach from "./pages/interviewCoach/InterviewCoach"
 import InterviewReport from "./pages/interviewCoach/InterviewReport"
 import ATScheck from "./pages/resume/ATSCheck"
+import JobSearch from "./pages/jobs/JobSearch"
+import JobDetail from "./pages/jobs/JobDetails"
 
 function App() {
   return (
@@ -27,13 +23,9 @@ function App() {
           <Route path='/' element={<Home/>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path='/register' element={<Register/>}/>
-          <Route path='/jobs' element={<JobList/>}/> 
-          <Route path='/jobs/new' element={<PostJob/>}/>
-          <Route path='/dashboard/employer' element={<EmployerDashboard/>}/>
-          <Route path='/jobs/:jobId/apply' element={<JobApplyPage/>}/>
+          <Route path="/job-search" element={<JobSearch/>}/>
+          <Route path="/job/:id" element={<JobDetail/>}/>
           <Route path='/dashboard/seeker' element={<SeekerDashboard/>}/>
-          <Route path='/dashboard/seeker/applications/update/:applicationId' element={<UpdateApplicationPage/>}/>
-          <Route path='/dashboard/employer/jobApplications/:jobId' element={<JobApplications/>}/>
           <Route path='/resume-builder' element={<ResumeBuilder/>}/>
           <Route path='/ats-check' element={<ATScheck/>}/>
           <Route path='/interview' element={<InterviewCoach/>}/>

@@ -2,10 +2,16 @@ import axios from "../../api/axios"
 import { useState } from "react"
 import { CheckCircleIcon, AlertCircleIcon, TrendingUpIcon } from "lucide-react"
 import { motion } from "framer-motion"
+import { useLocation } from "react-router-dom"
 
 export default function ATScheck() {
+
+  const location= useLocation()
+  const jd= location.state || "";
+  console.log(jd)
+
   const [feedback, setFeedback] = useState(null)
-  const [jobDescription, setJobDescription] = useState("")
+  const [jobDescription, setJobDescription] = useState(jd.jobDescription)
   const [resumeFile, setResumeFile] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
@@ -39,7 +45,7 @@ export default function ATScheck() {
     formData.append("jobDescription", jobDescription)
 
     try {
-      const response = await axios.post("/resume/ats-check", formData, {
+      const response = await axios.post("/resume/check-ats", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

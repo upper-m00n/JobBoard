@@ -1,14 +1,19 @@
 import { useState, useRef } from "react"
 import axios from "../../api/axios"
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 
 const InterviewCoach = () => {
+
+  const location= useLocation();
+
+  const jd=location.state || "";
+
   const [isLoading, setIsLoading] = useState(false)
   const [messages, setMessages] = useState([])
   const [sessionId, setSessionId] = useState(null)
   const [isInterviewStarted, setIsInterviewStarted] = useState(false)
   const [isRecording, setIsRecording] = useState(false)
-  const [jobDescription, setJobDescription] = useState("SDE-I")
+  const [jobDescription, setJobDescription] = useState(jd.jobDescription);
 
   const mediaRecorder = useRef(null)
   const audioChunks = useRef([])
